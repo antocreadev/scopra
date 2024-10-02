@@ -44,9 +44,13 @@ const addMakerToMap = (latitude, longitude, name, category = '') => {
 const getMonuments = async (q = '') => {
   const monumentsList = document.querySelector('#monumentsList');
   monumentsList.innerHTML = '';
-  const apiURL = 'https://www.data.corsica/api/records/1.0/search/?dataset=liste-des-monuments-historiques-en-corse&rows=9999&q=' + q;
-  const response = await fetch(apiURL);
-  const data = await response.json();
+  // const apiURL = 'https://www.data.corsica/api/records/1.0/search/?dataset=liste-des-monuments-historiques-en-corse&rows=9999&q=' + q;
+  // const response = await fetch(apiURL);
+  // const data = await response.json();
+  // récupère les données en local
+  const data = await fetch('/data/data.json').then(response => response.json());
+  console.log(data);
+
 
   const addElement = (name, category, lat, lon) => {
     category = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
